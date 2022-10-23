@@ -23,13 +23,16 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 import rospy
 from geometry_msgs.msg import Twist, Quaternion
+from nav_msgs.msg  import Odometry
+from tf.transformations import euler_from_quaternion, quaternion_from_euler
+
 from kobuki_msgs.msg import BumperEvent
 from kobuki_msgs.msg import WheelDropEvent
 
 class GoForward():
     def __init__(self):
         # initiliaze
-        rospy.init_node('GoForwardBumpers', anonymous=False)
+        rospy.init_node('GoForwardOdometry', anonymous=False)
 
 	    # tell user how to stop TurtleBot
         rospy.loginfo("To stop TurtleBot CTRL + C")
@@ -46,7 +49,8 @@ class GoForward():
 
         #publisher for WheelDrop events
         rospy.Subscriber("/mobile_base/events/wheel_drop",WheelDropEvent,self.WheelDropEventCallback)
-     
+
+        rospy.Subscriber("/odom", Odometry, self.get_rotation)
 	    #TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
         r = rospy.Rate(10)
 
@@ -101,6 +105,9 @@ class GoForward():
         else:
             self.state = 2
             rospy.loginfo("[INFO]: WHEELS DROPPED. STARTING IN 2s...")
+
+    def get_rotation(msg):
+        pass
                         
         
     def shutdown(self):
