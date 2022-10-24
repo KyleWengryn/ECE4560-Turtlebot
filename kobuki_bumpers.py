@@ -45,25 +45,26 @@ from kobuki_msgs.msg import BumperEvent
 
 class kobuki_bumper():
 
-	def __init__(self):
-		rospy.init_node("kobuki_bumper")		
+    def __init__(self):
+        rospy.init_node("kobuki_bumper")		
 
-		#monitor kobuki's bumper events
-		rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
+    #monitor kobuki's bumper events
+        rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
 
-		#rospy.spin() tells the program to not exit until you press ctrl + c.  If this wasn't there... 
-        # it'd subscribe and then immediatly exit (therefore stop "listening" to the thread).
-		rospy.spin()
+    #rospy.spin() tells the program to not exit until you press ctrl + c.  If this wasn't there... 
+    # it'd subscribe and then immediatly exit (therefore stop "listening" to the thread).
+        rospy.spin()
+
 
 
     def BumperEventCallback(self,data):
-        if ( data.state == BumperEvent.RELEASED ) :
+        if ( data.state == BumperEvent.RELEASED ):
             state = "RELEASED"
         else:
             state = "PRESSED"  
-        if ( data.bumper == BumperEvent.LEFT ) :
+        if ( data.bumper == BumperEvent.LEFT ):
             button = "LEFT"
-        elif ( data.button == BumperEvent.RIGHT ) :
+        elif ( data.button == BumperEvent.RIGHT ):
             button = "RIGHT"
         else:
             button = "CENTER"
