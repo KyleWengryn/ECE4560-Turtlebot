@@ -96,11 +96,11 @@ class GoForward():
 
     def WheelDropEventCallback(self, data):
         if data.state == WheelDropEvent.RAISED:
-            self.state = 1
-            rospy.loginfo("[INFO]: WHEELS RAISED. STOPPING TURTLEBOT")
-        else:
             self.state = 2
-            rospy.loginfo("[INFO]: WHEELS DROPPED. STARTING IN 2s...")
+            rospy.loginfo("[INFO]: WHEELS RAISED. STARTING IN 2s...")
+        else:
+            self.state = 1
+            rospy.loginfo("[INFO]: WHEELS DROPPED. STOPPING TURTLEBOT")
                         
         
     def shutdown(self):
