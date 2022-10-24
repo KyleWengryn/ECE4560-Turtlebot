@@ -51,7 +51,7 @@ class GoForward():
         # Twist is a datatype for velocity
         move_cmd = Twist()
 	
-        target = math.pi / 2
+        target = 0
 
         self.yaw = math.pi / 2
 
