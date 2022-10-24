@@ -56,7 +56,7 @@ class GoForward():
         self.yaw = None
         while not self.yaw:
             pass
-        
+
         target = self.yaw
 
         move_cmd.linear.x = 0.1
@@ -67,7 +67,7 @@ class GoForward():
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
             
-            move_cmd.angular.z = 0.50 * (target - self.yaw)
+            move_cmd.angular.z = 0.75 * (target - self.yaw)
             self.cmd_vel.publish(move_cmd)
 
             rospy.loginfo(self.yaw)
