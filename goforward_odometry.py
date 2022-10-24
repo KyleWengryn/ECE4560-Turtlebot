@@ -22,12 +22,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 # python goforward.py
 
 import rospy
-from geometry_msgs.msg import Twist, Quaternion
+from geometry_msgs.msg import Twist
 from nav_msgs.msg  import Odometry
 from tf.transformations import euler_from_quaternion, quaternion_from_euler
+import math
 
-from kobuki_msgs.msg import BumperEvent
-from kobuki_msgs.msg import WheelDropEvent
 
 class GoForward():
     def __init__(self):
@@ -44,11 +43,6 @@ class GoForward():
         # Tip: You may need to change cmd_vel_mux/input/navi to /cmd_vel if you're not using TurtleBot2
         self.cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
 
-        #Publisher for bumper events
-        rospy.Subscriber("/mobile_base/events/bumper",BumperEvent,self.BumperEventCallback)
-
-        #publisher for WheelDrop events
-        rospy.Subscriber("/mobile_base/events/wheel_drop",WheelDropEvent,self.WheelDropEventCallback)
 
         rospy.Subscriber("/odom", Odometry, self.get_rotation)
 	    #TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
@@ -57,59 +51,30 @@ class GoForward():
         # Twist is a datatype for velocity
         move_cmd = Twist()
 	
-        #Set the states
-        self.state = 0
+        target = math.pi / 2
 
-        # state data structure 
-        self.state_values = [
-            {
-                'linear_x': 0.2,
-                'angular_z': 0.0
-            },
-            {
-                'linear_x': 0.0,
-                'angular_z': 0.0
-            }
-        ]
+        yaw = math.pi / 2
 
+        move_cmd.linear.x = 0.1
+        move_cmd.angular.z = 0.0
+
+        turn_rate = 0.50
 
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
-            # check for release state
-            if self.state == 2:
-                rospy.sleep(2)
-                self.state = 0
-            # set linear and angular values based on state
-            move_cmd.linear.x = self.state_values[self.state]['linear_x']
-            move_cmd.angular.z = self.state_values[self.state]['angular_z']
-	        # publish the velocity
+            
+            move_cmd.angular.z = 0.50 (target = self.yaw)
             self.cmd_vel.publish(move_cmd)
-	        # wait for 0.1 seconds (10 HZ) and publish again
+    
             r.sleep()
 
 
-    def BumperEventCallback(self, data):
-        if data.state == BumperEvent.PRESSED:
-            self.state = 1
-            rospy.loginfo("[INFO]: BUMPER PRESSED. STOPPING TURTLEBOT")
-
-        else:
-            self.state = 2
-            rospy.loginfo("[INFO]: BUMPER RELEASED. STARTING IN 2s...")
-
-
-    def WheelDropEventCallback(self, data):
-        if data.state == WheelDropEvent.RAISED:
-            self.state = 1
-            rospy.loginfo("[INFO]: WHEELS RAISED. STOPPING TURTLEBOT")
-        else:
-            self.state = 2
-            rospy.loginfo("[INFO]: WHEELS DROPPED. STARTING IN 2s...")
 
     def get_rotation(self, msg):
         orientation_q = msg.pose.pose.orientation
         orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
         (roll, pitch, yaw) = euler_from_quaternion (orientation_list)
+        self.yaw = yaw
         rospy.loginfo(yaw)
                         
         
