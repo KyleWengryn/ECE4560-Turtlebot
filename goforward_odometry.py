@@ -66,7 +66,8 @@ class GoForward():
             move_cmd.angular.z = 0.50 * (target - self.yaw)
             self.cmd_vel.publish(move_cmd)
 
-            print(f"CURRENT: {self.yaw} | ANGULAR VELO: {0.50 * (target - self.yaw)}")
+            rospy.loginfo(self.yaw)
+            #print(f"CURRENT: {self.yaw} | ANGULAR VELO: {0.50 * (target - self.yaw)}")
     
             r.sleep()
 
