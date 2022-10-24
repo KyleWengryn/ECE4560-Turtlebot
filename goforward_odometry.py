@@ -53,7 +53,11 @@ class GoForward():
 	
         target = 0
 
-        self.yaw = math.pi / 2
+        self.yaw = None
+        while not self.yaw:
+            pass
+        
+        target = self.yaw
 
         move_cmd.linear.x = 0.1
         move_cmd.angular.z = 0.0
