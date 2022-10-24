@@ -63,8 +63,10 @@ class GoForward():
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
             
-            move_cmd.angular.z = 0.50 (target = self.yaw)
+            move_cmd.angular.z = 0.50 * (target - self.yaw)
             self.cmd_vel.publish(move_cmd)
+
+            rospy.loginfo(f"CURRENT: {self.yaw} | ANGULAR VELO: {0.50 * (target - self.yaw)}")
     
             r.sleep()
 
@@ -75,7 +77,7 @@ class GoForward():
         orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
         (roll, pitch, yaw) = euler_from_quaternion (orientation_list)
         self.yaw = yaw
-        rospy.loginfo(yaw)
+        #rospy.loginfo(yaw)
                         
         
     def shutdown(self):
