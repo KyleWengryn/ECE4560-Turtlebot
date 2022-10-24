@@ -64,7 +64,7 @@ class kobuki_bumper():
             state = "PRESSED"  
         if ( data.bumper == BumperEvent.LEFT ):
             button = "LEFT"
-        elif ( data.button == BumperEvent.RIGHT ):
+        elif ( data.bumper == BumperEvent.RIGHT ):
             button = "RIGHT"
         else:
             button = "CENTER"
