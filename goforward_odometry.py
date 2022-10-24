@@ -62,12 +62,12 @@ class GoForward():
         move_cmd.linear.x = 0.1
         move_cmd.angular.z = 0.0
 
-        turn_rate = 0.50
+        gain = 0.50
 
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
             
-            move_cmd.angular.z = 0.75 * (target - self.yaw)
+            move_cmd.angular.z = gain * (target - self.yaw)
             self.cmd_vel.publish(move_cmd)
 
             rospy.loginfo(self.yaw)
