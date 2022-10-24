@@ -106,7 +106,7 @@ class GoForward():
             self.state = 2
             rospy.loginfo("[INFO]: WHEELS DROPPED. STARTING IN 2s...")
 
-    def get_rotation(msg):
+    def get_rotation(self, msg):
         orientation_q = msg.pose.pose.orientation
         orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
         (roll, pitch, yaw) = euler_from_quaternion (orientation_list)
