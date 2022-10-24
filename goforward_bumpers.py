@@ -59,7 +59,7 @@ class GoForward():
         # state data structure 
         self.state_values = [
             {
-                'linear_x': 0.2,
+                'linear_x': 0.1,
                 'angular_z': 0.0
             },
             {
