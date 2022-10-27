@@ -66,7 +66,7 @@ class TurnInPlace():
         while not rospy.is_shutdown():
 
             while 1:
-                rospy.loginfo("Target Angle: ", end="")
+                print("Target Angle: ", end="")
                 target_angle = input()
                 target_angle = target_angle * math.pi / 180
                 
