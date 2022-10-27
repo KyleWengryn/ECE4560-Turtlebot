@@ -26,6 +26,7 @@ from geometry_msgs.msg import Twist
 from nav_msgs.msg  import Odometry
 from tf.transformations import euler_from_quaternion, quaternion_from_euler
 import math
+import sys
 
 
 class TurnInPlace():
@@ -94,6 +95,7 @@ class TurnInPlace():
         self.cmd_vel.publish(Twist())
 	    # sleep just makes sure TurtleBot receives the stop command prior to shutting down the script
         rospy.sleep(1)
+        sys.exit()
  
 if __name__ == '__main__':
     try:
