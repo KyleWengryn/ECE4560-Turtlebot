@@ -28,10 +28,10 @@ from tf.transformations import euler_from_quaternion, quaternion_from_euler
 import math
 
 
-class GoForward():
+class TurnInPlace():
     def __init__(self):
         # initiliaze
-        rospy.init_node('GoForwardOdometry', anonymous=False)
+        rospy.init_node('TurnInPlace', anonymous=False)
 
 	    # tell user how to stop TurtleBot
         rospy.loginfo("To stop TurtleBot CTRL + C")
@@ -54,26 +54,28 @@ class GoForward():
         target = 0
 
         self.yaw = None
-        while not self.yaw:
-            pass
-
+   
         target = self.yaw
 
-        move_cmd.linear.x = 0.1
+        move_cmd.linear.x = 0.0
         move_cmd.angular.z = 0.0
 
         gain = 0.50
 
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
-            
-            move_cmd.angular.z = gain * (target - self.yaw)
-            self.cmd_vel.publish(move_cmd)
 
-            rospy.loginfo(self.yaw)
-            #print(f"CURRENT: {self.yaw} | ANGULAR VELO: {0.50 * (target - self.yaw)}")
-    
-            r.sleep()
+            while 1:
+                rospy.loginfo("Target Angle: ")
+                target_angle = input()
+                target_angle = target_angle * math.pi / 180
+                current_angle = self.yaw
+
+                while current_angle != target_angle:
+                    move_cmd.angular.z = gain * (target_angle - self.yaw)
+                    self.cmd_vel.publish(move_cmd)
+                    rospy.loginfo(self.yaw)
+                    r.sleep()
 
 
 
@@ -95,7 +97,7 @@ class GoForward():
  
 if __name__ == '__main__':
     try:
-        GoForward()
+        TurnInPlace()
     except Exception as e:
         rospy.loginfo(e)
         rospy.loginfo("GoForward node terminated.")
