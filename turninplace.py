@@ -71,11 +71,13 @@ class TurnInPlace():
             while alive:
                 rospy.loginfo("Target Angle: ")
                 target_angle = input()
-                target_angle = target_angle * math.pi / 180
 
                 if 'STOP' in target_angle:
                     alive = False
                     continue
+
+                
+                target_angle = target_angle * math.pi / 180
                 
 
                 while abs(self.yaw - target_angle) > 0.01:
