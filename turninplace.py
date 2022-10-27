@@ -72,11 +72,11 @@ class TurnInPlace():
                 rospy.loginfo("Target Angle: ")
                 target_angle = input()
 
-                if 'STOP' in target_angle:
+                if type(target_angle) == str:
                     alive = False
                     continue
 
-                
+
                 target_angle = target_angle * math.pi / 180
                 
 
