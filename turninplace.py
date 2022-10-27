@@ -66,28 +66,25 @@ class TurnInPlace():
 
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
-            alive = True
+           
+            rospy.loginfo("Target Angle: ")
+            target_angle = input()
 
-            while alive:
-                rospy.loginfo("Target Angle: ")
-                target_angle = input()
-
-                if type(target_angle) == str:
-                    alive = False
-                    continue
+            if type(target_angle) == str:
+                continue
 
 
-                target_angle = target_angle * math.pi / 180
-                
+            target_angle = target_angle * math.pi / 180
+            
 
-                while abs(self.yaw - target_angle) > 0.01:
-                    move_cmd.angular.z = gain * (target_angle - self.yaw)
-                    self.cmd_vel.publish(move_cmd)
-                    rospy.loginfo(self.yaw)
-                    r.sleep()
+            while abs(self.yaw - target_angle) > 0.01:
+                move_cmd.angular.z = gain * (target_angle - self.yaw)
+                self.cmd_vel.publish(move_cmd)
+                rospy.loginfo(self.yaw)
+                r.sleep()
 
             r.sleep()
-            self.shutdown()
+          
 
 
     def get_rotation(self, msg):
