@@ -21,6 +21,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 # On work station:
 # python goforward.py
 
+from logging import shutdown
 import rospy
 from geometry_msgs.msg import Twist
 from nav_msgs.msg  import Odometry
@@ -65,11 +66,16 @@ class TurnInPlace():
 
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
+            alive = True
 
-            while 1:
+            while alive:
                 rospy.loginfo("Target Angle: ")
                 target_angle = input()
                 target_angle = target_angle * math.pi / 180
+
+                if 'STOP' in target_angle:
+                    alive = False
+                    continue
                 
 
                 while abs(self.yaw - target_angle) > 0.01:
@@ -78,6 +84,8 @@ class TurnInPlace():
                     rospy.loginfo(self.yaw)
                     r.sleep()
 
+            r.sleep()
+            self.shutdown()
 
 
     def get_rotation(self, msg):
@@ -95,7 +103,7 @@ class TurnInPlace():
         self.cmd_vel.publish(Twist())
 	    # sleep just makes sure TurtleBot receives the stop command prior to shutting down the script
         rospy.sleep(1)
-        sys.exit()
+   
  
 if __name__ == '__main__':
     try:
