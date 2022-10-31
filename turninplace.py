@@ -77,7 +77,7 @@ class TurnInPlace():
             target_angle = target_angle * math.pi / 180
             
 
-            while abs(self.yaw - target_angle) > 0.10:
+            while abs(self.yaw - target_angle) > 0.05:
                 move_cmd.angular.z = gain * (target_angle - self.yaw)
                 self.cmd_vel.publish(move_cmd)
                 rospy.loginfo(self.yaw)
