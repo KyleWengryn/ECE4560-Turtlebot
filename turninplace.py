@@ -78,7 +78,7 @@ class TurnInPlace():
 
             target_angle = target_angle * math.pi / 180
 
-            rospy.loginfo(f"starting angle: {self.yaw}")
+            rospy.loginfo("starting angle: {}", self.yaw)
             
 
             while abs(self.yaw - target_angle) > 0.05:
