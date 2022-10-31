@@ -64,8 +64,8 @@ class TurnInPlace():
         move_cmd.angular.z = 0.0
 
         gain = 0.60
-
 	    # as long as you haven't ctrl + c keeping doing...
+        i = 0
         while not rospy.is_shutdown():
            
             rospy.loginfo("Target Angle: ")
@@ -88,6 +88,9 @@ class TurnInPlace():
                 r.sleep()
             
             rospy.loginfo(self.yaw * 180 / math.pi)
+
+            if i / 100 == 0:
+                rospy.loginfo(self.yaw * 180 / math.pi)
 
             r.sleep()
           
