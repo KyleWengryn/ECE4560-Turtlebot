@@ -60,7 +60,7 @@ class TurnInPlace():
         target = self.yaw
 
         move_cmd.linear.x = 0.0
-        move_cmd.angular.z = 0.1
+        move_cmd.angular.z = 0.3
 
         gain = 0.70
 
