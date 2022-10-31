@@ -98,7 +98,7 @@ class TurnInPlace():
         orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
         (roll, pitch, yaw) = euler_from_quaternion(orientation_list)
         self.yaw = yaw
-        rospy.loginfo(self.yaw * 180 / math.pi)
+        #rospy.loginfo(self.yaw * 180 / math.pi)
                         
         
     def shutdown(self):
