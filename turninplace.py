@@ -85,10 +85,13 @@ class TurnInPlace():
             while abs(self.yaw - target_angle) > 0.05:
                 angular_velo = gain * (target_angle - self.yaw) 
 
-                if angular_velo > 0.50 or angular_velo < -0.50:
+                if angular_velo > 0.50:
                     angular_velo = 0.50
+                
+                if angular_velo < -0.50:
+                    angular_velo = -0.50
 
-                move_cmd.angular.z = gain * (target_angle - self.yaw)
+                move_cmd.angular.z = angular_velo
             
                 self.cmd_vel.publish(move_cmd)
                 r.sleep()
