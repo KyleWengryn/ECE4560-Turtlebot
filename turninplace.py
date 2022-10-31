@@ -62,7 +62,7 @@ class TurnInPlace():
         move_cmd.linear.x = 0.0
         move_cmd.angular.z = 0.0
 
-        gain = 0.90
+        gain = 0.70
 
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
