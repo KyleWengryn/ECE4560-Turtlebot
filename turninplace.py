@@ -89,8 +89,6 @@ class TurnInPlace():
             
             rospy.loginfo(self.yaw * 180 / math.pi)
 
-            if i / 100 == 0:
-                rospy.loginfo(self.yaw * 180 / math.pi)
 
             r.sleep()
           
@@ -101,7 +99,7 @@ class TurnInPlace():
         orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
         (roll, pitch, yaw) = euler_from_quaternion (orientation_list)
         self.yaw = yaw
-        #rospy.loginfo(yaw)
+        rospy.loginfo(self.yaw)
                         
         
     def shutdown(self):
