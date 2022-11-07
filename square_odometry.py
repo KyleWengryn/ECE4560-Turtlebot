@@ -64,7 +64,7 @@ class GoForward():
 
         gain = 0.50
 
-        drive_state = {0: lambda : self.go_forward(), 1: lambda : self.turn_left()}
+        drive_state = {0: self.go_forward(), 1: self.turn_left()}
         state = 0
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
