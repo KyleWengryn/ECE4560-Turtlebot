@@ -107,7 +107,7 @@ class GoForward():
         if target > math.pi:
             target = -(math.pi + (target - math.pi))
         print('TARGET')
-        #print(target * 180 / math.pi)
+        print(target * 180 / math.pi)
     
 
         while abs(self.yaw - target) > 0.05 and not rospy.is_shutdown():
