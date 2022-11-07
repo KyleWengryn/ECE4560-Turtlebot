@@ -87,7 +87,7 @@ class GoForward():
         target = self.yaw
 
         start = time.time()
-        while time.time() - start < 2:
+        while time.time() - start < 2 and not rospy.is_shutdown():
             z = 0.50 * (target - self.yaw)
             self.move_cmd.linear.x = 0.2
             self.move_cmd.angular.z = z
@@ -103,19 +103,22 @@ class GoForward():
 
     def turn_left(self):
         target = self.yaw + math.pi/2
+        if target > math.pi:
+            target = -(math.pi - target)
 
-        while abs(self.yaw - target) > 0.05:
+        while abs(self.yaw - target) > 0.05 and not rospy.is_shutdown():
             angular_velo = 3 * (target- self.yaw) 
 
-            if angular_velo > 0.70:
-                angular_velo = 0.50
+            if angular_velo > 1.0:
+                angular_velo = 0.70
             
-            if angular_velo < -0.70:
-                angular_velo = -0.50
+            if angular_velo < -1.0:
+                angular_velo = -0.70
 
             self.move_cmd.angular.z = angular_velo
             self.move_cmd.linear.x = 0
             self.cmd_vel.publish(self.move_cmd)
+            print(self.yaw)
             self.r.sleep()
 
 
