@@ -29,8 +29,7 @@ import math
 
 
 class GoForward():
-    move_cmd = None
-    cmd_vel = None
+
     def __init__(self):
         # initiliaze
         rospy.init_node('GoForwardOdometry', anonymous=False)
