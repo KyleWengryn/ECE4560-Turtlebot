@@ -29,6 +29,8 @@ import math
 
 
 class GoForward():
+    move_cmd = None
+    cmd_vel = None
     def __init__(self):
         # initiliaze
         rospy.init_node('GoForwardOdometry', anonymous=False)
@@ -46,10 +48,10 @@ class GoForward():
 
         rospy.Subscriber("/odom", Odometry, self.get_rotation)
 	    #TurtleBot will stop if we don't keep telling it to move.  How often should we tell it to move? 10 HZ
-        r = rospy.Rate(10)
+        self.r = rospy.Rate(10)
 
         # Twist is a datatype for velocity
-        move_cmd = Twist()
+        self.move_cmd = Twist()
 	
         target = 0
 
@@ -59,8 +61,8 @@ class GoForward():
 
         target = self.yaw
 
-        move_cmd.linear.x = 0.1
-        move_cmd.angular.z = 0.0
+        self.move_cmd.linear.x = 0.1
+        self.move_cmd.angular.z = 0.0
 
         gain = 0.50
 
