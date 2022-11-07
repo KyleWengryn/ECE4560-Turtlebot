@@ -102,10 +102,10 @@ class GoForward():
 
 
     def turn_left(self):
-        target = self.yaw - math.pi/2
+        target = self.yaw + math.pi/2
 
         while abs(self.yaw - target) > 0.05:
-            angular_velo = 2 * (target- self.yaw) 
+            angular_velo = 3 * (target- self.yaw) 
 
             if angular_velo > 0.70:
                 angular_velo = 0.50
