@@ -64,16 +64,32 @@ class GoForward():
 
         gain = 0.50
 
+        drive_state = {0: lambda : self.go_forward(), 1: lambda : self.turn_left()}
+        state = 0
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
             
-            move_cmd.angular.z = gain * (target - self.yaw)
+            x, z = drive_state[state]
+            move_cmd.linear.x = x
+            move_cmd.angular.z = z
             self.cmd_vel.publish(move_cmd)
 
-            rospy.loginfo(self.yaw)
+            #rospy.loginfo(self.yaw)
             #print(f"CURRENT: {self.yaw} | ANGULAR VELO: {0.50 * (target - self.yaw)}")
     
             r.sleep()
+
+
+    def go_forward(self):
+        target = self.yaw
+        z = 0.50 * (target - self.yaw)
+        return 0.2, z
+
+
+
+    def turn_left(self):
+        pass
+
 
 
 
@@ -82,7 +98,7 @@ class GoForward():
         orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
         (roll, pitch, yaw) = euler_from_quaternion (orientation_list)
         self.yaw = yaw
-        print(orientation_list)
+        #print(orientation_list)
         #print(roll, pitch, yaw)
         #rospy.loginfo(yaw)
                         
