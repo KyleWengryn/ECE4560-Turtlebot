@@ -74,6 +74,8 @@ class GoForward():
     
             
             self.go_forward()
+            self.turn_left()
+        
         
 
             #rospy.loginfo(self.yaw)
@@ -100,7 +102,23 @@ class GoForward():
 
 
     def turn_left(self):
-        pass
+        target = self.yaw - math.pi/2
+
+        while abs(self.yaw - target) > 0.05:
+            angular_velo = 2 * (target- self.yaw) 
+
+            if angular_velo > 0.70:
+                angular_velo = 0.50
+            
+            if angular_velo < -0.70:
+                angular_velo = -0.50
+
+            self.move_cmd.angular.z = angular_velo
+            self.move_cmd.linear.x = 0
+            self.cmd_vel.publish(self.move_cmd)
+            self.r.sleep()
+
+
 
 
 
