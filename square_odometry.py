@@ -87,7 +87,7 @@ class GoForward():
         target = self.yaw
 
         start = time.time()
-        while time.time() - start < 2 or not rospy.is_shutdown():
+        while time.time() - start < 2 and not rospy.is_shutdown():
             z = 0.50 * (target - self.yaw)
             self.move_cmd.linear.x = 0.2
             self.move_cmd.angular.z = z
@@ -107,7 +107,7 @@ class GoForward():
             target = -(math.pi - target)
         print(target * 180 / math.pi)
 
-        while abs(self.yaw - target) > 0.05 or not rospy.is_shutdown():
+        while abs(self.yaw - target) > 0.05 and not rospy.is_shutdown():
             angular_velo = 3 * (target- self.yaw) 
 
             if angular_velo > 1.0:
