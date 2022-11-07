@@ -105,7 +105,7 @@ class GoForward():
     def turn_left(self):
         target = self.yaw + math.pi/2
         if target > math.pi:
-            target = -(target - math.pi)
+            target = -(math.pi + (target - math.pi))
         print('TARGET')
         print(target * 180 / math.pi)
     
