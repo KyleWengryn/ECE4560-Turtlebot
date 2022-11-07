@@ -106,7 +106,7 @@ class GoForward():
         target = self.yaw + math.pi/2
         if target > math.pi:
             target = -(math.pi + (target - math.pi))
-        #print('TARGET')
+        print('TARGET')
         #print(target * 180 / math.pi)
     
 
