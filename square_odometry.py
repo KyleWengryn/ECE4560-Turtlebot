@@ -68,22 +68,26 @@ class GoForward():
         state = 0
 	    # as long as you haven't ctrl + c keeping doing...
         while not rospy.is_shutdown():
+
+    
             
             x, z = drive_state[state]
-            move_cmd.linear.x = x
-            move_cmd.angular.z = z
-            self.cmd_vel.publish(move_cmd)
+        
 
             #rospy.loginfo(self.yaw)
             #print(f"CURRENT: {self.yaw} | ANGULAR VELO: {0.50 * (target - self.yaw)}")
     
-            r.sleep()
 
 
     def go_forward(self):
         target = self.yaw
+
+
         z = 0.50 * (target - self.yaw)
-        return 0.2, z
+        self.move_cmd.linear.x = 0.2
+        self.move_cmd.angular.z = z
+        self.cmd_vel.publish(self.move_cmd)
+        self.r.sleep()
 
 
 
