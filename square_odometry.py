@@ -26,6 +26,7 @@ from geometry_msgs.msg import Twist
 from nav_msgs.msg  import Odometry
 from tf.transformations import euler_from_quaternion, quaternion_from_euler
 import math
+import time
 
 
 class GoForward():
@@ -83,10 +84,16 @@ class GoForward():
     def go_forward(self):
         target = self.yaw
 
-
-        z = 0.50 * (target - self.yaw)
-        self.move_cmd.linear.x = 0.2
-        self.move_cmd.angular.z = z
+        start = time.time()
+        while time.time() - start < 2:
+            z = 0.50 * (target - self.yaw)
+            self.move_cmd.linear.x = 0.2
+            self.move_cmd.angular.z = z
+            self.cmd_vel.publish(self.move_cmd)
+            self.r.sleep()
+        
+        self.move_cmd.linear.x = 0
+        self.move_cmd.angular.z = 0
         self.cmd_vel.publish(self.move_cmd)
         self.r.sleep()
 
