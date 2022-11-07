@@ -111,7 +111,7 @@ class GoForward():
     
 
         while abs(self.yaw - target) > 0.05 and not rospy.is_shutdown():
-            angular_velo = 3 * (target- self.yaw) 
+            angular_velo = 3 * (-abs(target- self.yaw)) 
 
             if angular_velo > 1.0:
                 angular_velo = 0.70
