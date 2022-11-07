@@ -106,7 +106,9 @@ class GoForward():
         target = self.yaw + math.pi/2
         if target > math.pi:
             target = -(math.pi - target)
-        print(f'TARGET {target * 180 / math.pi}')
+        print('TARGET')
+        print(target * 180 / math.pi)
+    
 
         while abs(self.yaw - target) > 0.05 and not rospy.is_shutdown():
             angular_velo = 3 * (target- self.yaw) 
