@@ -103,12 +103,13 @@ class GoForward():
 
 
     def turn_left(self):
+        
         target = self.yaw + math.pi/2
+
         if target > math.pi:
-            target = -(math.pi + (target - math.pi))
-        print('TARGET')
-        print(target * 180 / math.pi)
-    
+            target = -math.pi + (target - math.pi)
+            
+
 
         while abs(self.yaw - target) > 0.05 and not rospy.is_shutdown():
             angular_velo = 3 * abs(target- self.yaw)
@@ -135,6 +136,7 @@ class GoForward():
         orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
         (roll, pitch, yaw) = euler_from_quaternion (orientation_list)
         self.yaw = yaw
+
         
         #print(orientation_list)
         #print(roll, pitch, yaw)
