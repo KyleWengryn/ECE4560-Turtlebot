@@ -72,7 +72,7 @@ class GoForward():
 
     
             
-            x, z = drive_state[state]
+            drive_state[state]
         
 
             #rospy.loginfo(self.yaw)
