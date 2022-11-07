@@ -122,7 +122,7 @@ class GoForward():
             self.move_cmd.angular.z = angular_velo
             self.move_cmd.linear.x = 0
             self.cmd_vel.publish(self.move_cmd)
-            print(self.yaw * 100 / math.pi)
+            print(self.yaw * 180 / math.pi)
             self.r.sleep()
 
 
