@@ -82,7 +82,8 @@ class GoForward():
         orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
         (roll, pitch, yaw) = euler_from_quaternion (orientation_list)
         self.yaw = yaw
-        print(roll, pitch, yaw)
+        print(orientation_list)
+        #print(roll, pitch, yaw)
         #rospy.loginfo(yaw)
                         
         
