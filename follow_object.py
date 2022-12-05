@@ -82,7 +82,7 @@ def show_color_highlight(img):
     move_cmd.angular.z = angular
 
     
-    print NORM_IMAGE[cX, cY]
+    print NORM_IMAGE[cY, cX]
 
     cmd_vel.publish(move_cmd)
     r.sleep()
