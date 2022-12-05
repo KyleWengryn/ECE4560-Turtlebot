@@ -42,25 +42,23 @@ def show_color_highlight(img):
     #convert the BGR image to HSV colour space
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-    #set the lower and upper bounds for the green hue
-    lower_green = np.array([100,0,0])
-    upper_green = np.array([255,200,200])
-
-    #create a mask for green colour using inRange function
-    mask = cv2.inRange(hsv, lower_green, upper_green)
-
-    #perform bitwise and on the original image arrays using the mask
-    res = cv2.bitwise_and(img, img, mask=mask)
-
-    #create resizable windows for displaying the images
-    cv2.namedWindow("res", cv2.WINDOW_NORMAL)
-    cv2.namedWindow("hsv", cv2.WINDOW_NORMAL)
-    cv2.namedWindow("mask", cv2.WINDOW_NORMAL)
-
-    #display the images
-    cv2.imshow("mask", mask)
-    cv2.imshow("hsv", hsv)
-    cv2.imshow("res", res)
+    # lower boundary RED color range values; Hue (0 - 10)
+    lower1 = np.array([0, 100, 20])
+    upper1 = np.array([10, 255, 255])
+    
+    # upper boundary RED color range values; Hue (160 - 180)
+    lower2 = np.array([160,100,20])
+    upper2 = np.array([179,255,255])
+    
+    lower_mask = cv2.inRange(img, lower1, upper1)
+    upper_mask = cv2.inRange(img, lower2, upper2)
+    
+    full_mask = lower_mask + upper_mask
+    
+    result = cv2.bitwise_and(result, result, mask=full_mask)
+    
+    cv2.imshow('mask', full_mask)
+    cv2.imshow('result', result)
     cv2.waitKey(3)
 
 
