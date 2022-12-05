@@ -79,10 +79,6 @@ def show_color_highlight(img):
 
     move_cmd.angular.z = angular
 
-    print gray_image.shape
-
-
-
     cmd_vel.publish(move_cmd)
     r.sleep()
 
@@ -127,6 +123,7 @@ def image_callback2(img_msg):
         # require Numpy arrays.
    
         cv2.imshow("Image from my node", cv_image)
+        print cv_image.shape
         cv2.waitKey(3)
 
     except CvBridgeError as e:
