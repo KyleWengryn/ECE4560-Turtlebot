@@ -32,7 +32,7 @@ def show_image2(img):
 # Define a callback for the Image message
 def image_callback(img_msg):
     # log some info about the image topic
-    rospy.loginfo(img_msg.header)
+    #rospy.loginfo(img_msg.header)
 
     # Try to convert the ROS Image message to a CV2 Image
     try:
@@ -43,6 +43,9 @@ def image_callback(img_msg):
     # Flip the image 90deg
     # cv_image = cv2.transpose(cv_image)
     # cv_image = cv2.flip(cv_image,1)
+    cv_image_arr = np.array(cv_image)
+
+    rospy.loginfo(cv_image_arr.shape)
 
     # Show the converted image
     show_image(cv_image)
@@ -67,7 +70,7 @@ def image_callback2(img_msg):
         print e
 
 # Initalize a subscriber to the "/camera/rgb/image_raw" topic with the function "image_callback" as a callback
-#color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
+color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
 depth_image = rospy.Subscriber("/camera/depth_registered/image_raw", Image, image_callback2)
 
 
