@@ -68,14 +68,15 @@ def show_color_highlight(img):
     cY = int(M["m01"] / M["m00"])
 
     move_cmd.linear.x = 0.0
-    move_cmd.angular.z = (cX - 320) * 0.10
+    angular = (cX - 320) * 0.10
+    move_cmd.angular.z = angular
 
     cmd_vel.publish(move_cmd)
     r.sleep()
 
     # goal is to get centroid to be 320, 240
 
-    print cX, cY
+    print cX, cY, angular
 
 
 
