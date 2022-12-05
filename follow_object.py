@@ -79,7 +79,7 @@ def show_color_highlight(img):
 
     move_cmd.angular.z = angular
 
-    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     #norm_image = cv2.normalize(img, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
     print gray_image.shape
 
