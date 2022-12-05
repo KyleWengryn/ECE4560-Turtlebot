@@ -29,6 +29,18 @@ def show_image2(img):
     cv2.imshow("Image Window2", img)
     cv2.waitKey(3)
 
+def show_color_highlight(cv_image_arr):
+    for x in range(0,480):
+        for y in range(0, 640):
+            if cv_image_arr[x][y][0] > 200 and cv_image_arr[x][y][1] < 50 and cv_image_arr[x][y][2] < 50:
+                pass
+            else:
+                cv_image_arr[x][y] = [255, 255, 255]
+
+    cv2.imshow("Image Window2", cv_image_arr)
+    cv2.waitKey(3)
+
+
 # Define a callback for the Image message
 def image_callback(img_msg):
     # log some info about the image topic
@@ -46,12 +58,7 @@ def image_callback(img_msg):
     cv_image_arr = np.array(cv_image)
     rospy.loginfo(cv_image_arr.shape)
 
-    for x in range(0,480):
-        for y in range(0, 640):
-            if cv_image_arr[x][y][0] > 200 and cv_image_arr[x][y][1] < 50 and cv_image_arr[x][y][2] < 50:
-                pass
-            else:
-                cv_image_arr[x][y] = [255, 255, 255]
+    show_color_highlight(cv_image_arr)
     # Show the converted image
     show_image(cv_image_arr)
 
