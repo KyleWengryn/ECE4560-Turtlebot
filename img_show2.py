@@ -24,6 +24,10 @@ def show_image(img):
     cv2.imshow("Image Window", img)
     cv2.waitKey(3)
 
+def show_image(img):
+    cv2.imshow("Image Window2", img)
+    cv2.waitKey(3)
+
 # Define a callback for the Image message
 def image_callback(img_msg):
     # log some info about the image topic
@@ -42,9 +46,26 @@ def image_callback(img_msg):
     # Show the converted image
     show_image(cv_image)
 
+def image_callback2(img_msg):
+    # log some info about the image topic
+    rospy.loginfo(img_msg.header)
+
+    # Try to convert the ROS Image message to a CV2 Image
+    try:
+        cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
+    except CvBridgeError, e:
+        rospy.logerr("CvBridge Error: {0}".format(e))
+
+    # Flip the image 90deg
+    # cv_image = cv2.transpose(cv_image)
+    # cv_image = cv2.flip(cv_image,1)
+
+    # Show the converted image
+    show_image2(cv_image)
+
 # Initalize a subscriber to the "/camera/rgb/image_raw" topic with the function "image_callback" as a callback
-#color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
-depth_image = rospy.Subscriber("/camera/depth/image", Image, image_callback)
+color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
+depth_image = rospy.Subscriber("/camera/depth_registerred/image_raw", Image, image_callback2)
 
 
 # Initialize an OpenCV Window named "Image Window"
