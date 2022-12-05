@@ -43,8 +43,8 @@ def show_color_highlight(img):
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
     #set the lower and upper bounds for the green hue
-    lower_green = np.array([45,80,45])
-    upper_green = np.array([50,255,255])
+    lower_green = np.array([20,0,0])
+    upper_green = np.array([255,200,200])
 
     #create a mask for green colour using inRange function
     mask = cv2.inRange(hsv, lower_green, upper_green)
