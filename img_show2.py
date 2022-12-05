@@ -44,7 +44,7 @@ def image_callback(img_msg):
 
 # Initalize a subscriber to the "/camera/rgb/image_raw" topic with the function "image_callback" as a callback
 color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
-depth_image = rospy.Subscriber("/camera/depth/image_raw", Image, image_callback)
+depth_image = rospy.Subscriber("/camera/depth/image", Image, image_callback)
 
 
 # Initialize an OpenCV Window named "Image Window"
