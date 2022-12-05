@@ -55,6 +55,14 @@ def show_color_highlight(img):
     upper_mask = cv2.inRange(img, lower2, upper2)
     
     full_mask = lower_mask + upper_mask
+
+    M = cv2.moments(full_mask)
+ 
+    # calculate x,y coordinate of center
+    cX = int(M["m10"] / M["m00"])
+    cY = int(M["m01"] / M["m00"])
+
+    print cX, cY
     
     result = cv2.bitwise_and(result, result, mask=full_mask)
     
