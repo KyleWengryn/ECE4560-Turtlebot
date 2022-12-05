@@ -24,7 +24,7 @@ def show_image(img):
     cv2.imshow("Image Window", img)
     cv2.waitKey(3)
 
-def show_image(img):
+def show_image2(img):
     cv2.imshow("Image Window2", img)
     cv2.waitKey(3)
 
