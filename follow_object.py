@@ -84,7 +84,7 @@ def show_color_highlight(img):
     
     distance = NORM_IMAGE[cY, cX]
 
-    linear = (distance - 0.33) * 0.40
+    linear = (distance - 0.33) * 0.1
     if linear > 0.2:
         linear = 0.2
     if linear < -0.2:
