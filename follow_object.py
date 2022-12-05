@@ -70,6 +70,13 @@ def show_color_highlight(img):
 
     move_cmd.linear.x = 0.0
     angular = (cX - 320) * 0.10
+
+    if angular > 0.50:
+        angular = 0.50
+    
+    if angular < -0.50:
+        angular = -0.50
+        
     move_cmd.angular.z = angular
 
     cmd_vel.publish(move_cmd)
