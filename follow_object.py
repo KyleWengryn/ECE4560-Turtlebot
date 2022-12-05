@@ -79,8 +79,10 @@ def show_color_highlight(img):
 
     move_cmd.angular.z = angular
 
-    norm_image = cv2.normalize(img, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
-    print norm_image.shape
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    #norm_image = cv2.normalize(img, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
+    print gray_image.shape
+
 
 
     cmd_vel.publish(move_cmd)
@@ -95,6 +97,7 @@ def show_color_highlight(img):
     
     #cv2.imshow('mask', full_mask)
     cv2.imshow('result', result)
+    cv2.imshow('grey', gray_image)
     cv2.waitKey(3)
 
 
