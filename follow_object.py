@@ -79,6 +79,10 @@ def show_color_highlight(img):
 
     move_cmd.angular.z = angular
 
+    norm_image = cv2.normalize(img, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
+    rospy.log(norm_image.shape)
+
+
     cmd_vel.publish(move_cmd)
     r.sleep()
 
