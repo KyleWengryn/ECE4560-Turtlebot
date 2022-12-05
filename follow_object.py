@@ -91,16 +91,12 @@ def show_color_highlight(img):
     if linear < -0.15:
         linear = -0.15
 
-    if (abs(linear - PREVIOUS_LINEAR)) > 0.1:
-        linear = PREVIOUS_LINEAR
-    else:
-        PREVIOUS_LINEAR = linear
+    if (abs(linear - PREVIOUS_LINEAR)) <= 0.1:
+       
+        move_cmd.linear.x = linear
 
-
-    move_cmd.linear.x = linear
-
-    cmd_vel.publish(move_cmd)
-    r.sleep()
+        cmd_vel.publish(move_cmd)
+        r.sleep()
 
     # goal is to get centroid to be 320, 240
 
