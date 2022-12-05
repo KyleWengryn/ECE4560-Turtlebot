@@ -91,12 +91,12 @@ def show_color_highlight(img):
     if linear < -0.15:
         linear = -0.15
 
-    if (linear - PREVIOUS_LINEAR) > 0.1:
+    if (linear - PREVIOUS_LINEAR) > 0.05:
         linear = PREVIOUS_LINEAR
     else:
         PREVIOUS_LINEAR = linear
 
-        
+
     move_cmd.linear.x = linear
 
     cmd_vel.publish(move_cmd)
@@ -104,7 +104,7 @@ def show_color_highlight(img):
 
     # goal is to get centroid to be 320, 240
 
-    print cX, cY, angular, linear
+    print cX, cY, angular, linear, distance
 
 
     result = cv2.bitwise_and(result, result, mask=full_mask)
