@@ -62,13 +62,13 @@ def image_callback2(img_msg):
         #cv_image_resized = cv2.resize(cv_image_norm, self.desired_shape, interpolation = cv2.INTER_CUBIC)
         #depthimg = cv_image_resized
         cv2.imshow("Image from my node", cv_image_norm)
-        cv2.waitKey(1)
+        cv2.waitKey(3)
     except CvBridgeError as e:
         print e
 
 # Initalize a subscriber to the "/camera/rgb/image_raw" topic with the function "image_callback" as a callback
 #color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
-depth_image = rospy.Subscriber("/camera/depth_registered/image_raw", Image, image_callback)
+depth_image = rospy.Subscriber("/camera/depth_registered/image_raw", Image, image_callback2)
 
 
 # Initialize an OpenCV Window named "Image Window"
