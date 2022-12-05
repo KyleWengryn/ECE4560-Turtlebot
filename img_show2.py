@@ -40,7 +40,8 @@ def show_color_highlight(img):
     # cv2.imshow("Image Window2", cv_image_arr)
 
     #convert the BGR image to HSV colour space
-    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    result = img.copy()
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
     # lower boundary RED color range values; Hue (0 - 10)
     lower1 = np.array([0, 100, 20])
