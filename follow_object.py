@@ -11,13 +11,14 @@ from cv_bridge import CvBridge, CvBridgeError
 
 # Print "Hello!" to terminal
 print "Hello!"
+rospy.init_node('opencv_example', anonymous=True)
 move_cmd = Twist()
 r = rospy.Rate(10)
 
 cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
 
 # Initialize the ROS Node named 'opencv_example', allow multiple nodes to be run with this name
-rospy.init_node('opencv_example', anonymous=True)
+
 
 # Print "Hello ROS!" to the Terminal and to a ROS Log file located in ~/.ros/log/loghash/*.log
 rospy.loginfo("Hello ROS!")
