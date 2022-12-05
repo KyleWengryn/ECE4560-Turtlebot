@@ -79,8 +79,6 @@ def show_color_highlight(img):
 
     move_cmd.angular.z = angular
 
-    gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    #norm_image = cv2.normalize(img, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
     print gray_image.shape
 
 
@@ -97,7 +95,6 @@ def show_color_highlight(img):
     
     #cv2.imshow('mask', full_mask)
     cv2.imshow('result', result)
-    cv2.imshow('grey', gray_image)
     cv2.waitKey(3)
 
 
@@ -128,18 +125,8 @@ def image_callback2(img_msg):
         cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
         # Convert the depth image to a Numpy array since most cv2 functions
         # require Numpy arrays.
-        try:
-            cv_image_array = np.array(cv_image, dtype = np.dtype('f8'))
-        except:
-            return 1
-        # Normalize the depth image to fall between 0 (black) and 1 (white)
-        # http://docs.ros.org/electric/api/rosbag_video/html/bag__to__video_8cpp_source.html lines 95-125
-        #cv_image_norm = cv2.normalize(cv_image_array, cv_image_array, 0, 1, cv2.NORM_MINMAX)
-        # Resize to the desired size
-        #cv_image_resized = cv2.resize(cv_image_norm, self.desired_shape, interpolation = cv2.INTER_CUBIC)
-        #depthimg = cv_image_resized
-        norm_image = cv2.normalize(cv_image, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
-        cv2.imshow("Image from my node", norm_image)
+   
+        cv2.imshow("Image from my node", cv_image)
         cv2.waitKey(3)
 
     except CvBridgeError as e:
@@ -147,7 +134,7 @@ def image_callback2(img_msg):
 
 # Initalize a subscriber to the "/camera/rgb/image_raw" topic with the function "image_callback" as a callback
 color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
-#depth_image = rospy.Subscriber("/camera/depth_registered/image_raw", Image, image_callback2)
+depth_image = rospy.Subscriber("/camera/depth_registered/image_raw", Image, image_callback2)
 
 
 # Initialize an OpenCV Window named "Image Window"
