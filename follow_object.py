@@ -85,6 +85,10 @@ def show_color_highlight(img):
     distance = NORM_IMAGE[cY, cX]
 
     linear = (distance - 0.33) 
+    if linear > 0.3:
+        linear = 0.3
+    if linear < -0.3:
+        linear = -0.3
     move_cmd.linear.x = linear
 
     cmd_vel.publish(move_cmd)
