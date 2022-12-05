@@ -84,7 +84,7 @@ def show_color_highlight(img):
     
     distance = NORM_IMAGE[cY, cX]
 
-    linear = (distance - 0.33) * 0.50
+    linear = (distance - 0.33) * 0.40
     if linear > 0.2:
         linear = 0.2
     if linear < -0.2:
@@ -96,7 +96,7 @@ def show_color_highlight(img):
 
     # goal is to get centroid to be 320, 240
 
-    print cX, cY, angular
+    print cX, cY, angular, linear
 
 
     result = cv2.bitwise_and(result, result, mask=full_mask)
