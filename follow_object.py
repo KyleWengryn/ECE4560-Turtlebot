@@ -136,7 +136,7 @@ def image_callback2(img_msg):
         # require Numpy arrays.
         NORM_IMAGE = cv2.normalize(cv_image, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
 
-        #cv2.imshow("Image from my node", cv_image)
+        cv2.imshow("Image from my node", NORM_IMAGE)
         cv2.waitKey(3)
 
     except CvBridgeError as e:
