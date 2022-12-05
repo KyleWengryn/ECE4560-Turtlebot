@@ -36,14 +36,15 @@ def image_callback(img_msg):
         rospy.logerr("CvBridge Error: {0}".format(e))
 
     # Flip the image 90deg
-    cv_image = cv2.transpose(cv_image)
-    cv_image = cv2.flip(cv_image,1)
+    # cv_image = cv2.transpose(cv_image)
+    # cv_image = cv2.flip(cv_image,1)
 
     # Show the converted image
     show_image(cv_image)
 
 # Initalize a subscriber to the "/camera/rgb/image_raw" topic with the function "image_callback" as a callback
-sub_image = rospy.Subscriber("/camera/rgb/image_raw", Image, image_callback)
+color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
+
 
 # Initialize an OpenCV Window named "Image Window"
 cv2.namedWindow("Image Window", 1)
