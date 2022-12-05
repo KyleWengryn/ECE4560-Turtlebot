@@ -79,6 +79,7 @@ def image_callback(img_msg):
     # cv_image = cv2.transpose(cv_image)
     # cv_image = cv2.flip(cv_image,1)
     cv_image_arr = np.array(cv_image)
+    show_color_highlight(cv_image_arr)
 
     # Show the converted image
     show_image(cv_image)
