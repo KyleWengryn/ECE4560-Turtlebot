@@ -91,7 +91,7 @@ def show_color_highlight(img):
     
     result = cv2.bitwise_and(result, result, mask=full_mask)
     
-    cv2.imshow('mask', full_mask)
+    #cv2.imshow('mask', full_mask)
     cv2.imshow('result', result)
     cv2.waitKey(3)
 
