@@ -29,15 +29,38 @@ def show_image2(img):
     cv2.imshow("Image Window2", img)
     cv2.waitKey(3)
 
-def show_color_highlight(cv_image_arr):
-    for x in range(0,480):
-        for y in range(0, 640):
-            if cv_image_arr[x][y][0] > 200 and cv_image_arr[x][y][1] < 50 and cv_image_arr[x][y][2] < 50:
-                pass
-            else:
-                cv_image_arr[x][y] = [255, 255, 255]
+def show_color_highlight(img):
+    # for x in range(0,480):
+    #     for y in range(0, 640):
+    #         if cv_image_arr[x][y][0] > 200 and cv_image_arr[x][y][1] < 50 and cv_image_arr[x][y][2] < 50:
+    #             pass
+    #         else:
+    #             cv_image_arr[x][y] = [255, 255, 255]
 
-    cv2.imshow("Image Window2", cv_image_arr)
+    # cv2.imshow("Image Window2", cv_image_arr)
+
+    #convert the BGR image to HSV colour space
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+    #set the lower and upper bounds for the green hue
+    lower_green = np.array([50,100,50])
+    upper_green = np.array([70,255,255])
+
+    #create a mask for green colour using inRange function
+    mask = cv2.inRange(hsv, lower_green, upper_green)
+
+    #perform bitwise and on the original image arrays using the mask
+    res = cv2.bitwise_and(img, img, mask=mask)
+
+    #create resizable windows for displaying the images
+    cv2.namedWindow("res", cv2.WINDOW_NORMAL)
+    cv2.namedWindow("hsv", cv2.WINDOW_NORMAL)
+    cv2.namedWindow("mask", cv2.WINDOW_NORMAL)
+
+    #display the images
+    cv2.imshow("mask", mask)
+    cv2.imshow("hsv", hsv)
+    cv2.imshow("res", res)
     cv2.waitKey(3)
 
 
@@ -56,11 +79,9 @@ def image_callback(img_msg):
     # cv_image = cv2.transpose(cv_image)
     # cv_image = cv2.flip(cv_image,1)
     cv_image_arr = np.array(cv_image)
-    rospy.loginfo(cv_image_arr.shape)
 
-    show_color_highlight(cv_image_arr)
     # Show the converted image
-    show_image(cv_image_arr)
+    show_image(cv_image)
 
 def image_callback2(img_msg):
     try:
