@@ -45,8 +45,15 @@ def image_callback(img_msg):
     # cv_image = cv2.flip(cv_image,1)
     cv_image_arr = np.array(cv_image)
     rospy.loginfo(cv_image_arr[0][0])
+
+    for x in cv_image_arr.shape[0]:
+        for y in cv_image_arr.shape[1]:
+            if cv_image_arr[x][y][0] > 200 and cv_image_arr[x][y][1] < 50 and cv_image_arr[x][y][2] < 50:
+                pass
+            else:
+                cv_image_arr[x][y] = [255, 255, 255]
     # Show the converted image
-    show_image(cv_image)
+    show_image(cv_image_arr)
 
 def image_callback2(img_msg):
     try:
@@ -64,6 +71,7 @@ def image_callback2(img_msg):
         #depthimg = cv_image_resized
         cv2.imshow("Image from my node", cv_image_norm)
         cv2.waitKey(3)
+
     except CvBridgeError as e:
         print e
 
