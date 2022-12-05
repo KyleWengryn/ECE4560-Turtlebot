@@ -15,6 +15,7 @@ rospy.init_node('opencv_example', anonymous=True)
 move_cmd = Twist()
 r = rospy.Rate(10)
 NORM_IMAGE = None
+PREVIOUS_LINEAR = 0
 
 cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
 
@@ -37,7 +38,7 @@ def show_image2(img):
     cv2.waitKey(3)
 
 def show_color_highlight(img):
-    global NORM_IMAGE
+    global NORM_IMAGE, PREVIOUS_LINEAR
     # for x in range(0,480):
     #     for y in range(0, 640):
     #         if cv_image_arr[x][y][0] > 200 and cv_image_arr[x][y][1] < 50 and cv_image_arr[x][y][2] < 50:
@@ -89,6 +90,13 @@ def show_color_highlight(img):
         linear = 0.15
     if linear < -0.15:
         linear = -0.15
+
+    if (linear - PREVIOUS_LINEAR) > 0.1:
+        linear = PREVIOUS_LINEAR
+    else:
+        PREVIOUS_LINEAR = linear
+
+        
     move_cmd.linear.x = linear
 
     cmd_vel.publish(move_cmd)
