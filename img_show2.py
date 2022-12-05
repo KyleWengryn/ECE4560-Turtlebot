@@ -1,6 +1,7 @@
 #!/usr/bin/env python2.7
   # Import ROS libraries and messages
 import rospy
+import numpy as np
 from sensor_msgs.msg import Image
 
 # Import OpenCV libraries and tools
@@ -47,25 +48,27 @@ def image_callback(img_msg):
     show_image(cv_image)
 
 def image_callback2(img_msg):
-    # log some info about the image topic
-    rospy.loginfo(img_msg.header)
-
-    # Try to convert the ROS Image message to a CV2 Image
     try:
-        cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
-    except CvBridgeError, e:
-        rospy.logerr("CvBridge Error: {0}".format(e))
-
-    # Flip the image 90deg
-    # cv_image = cv2.transpose(cv_image)
-    # cv_image = cv2.flip(cv_image,1)
-
-    # Show the converted image
-    show_image2(cv_image)
+        # The depth image is a single-channel float32 image
+        # the values is the distance in mm in z axis
+        cv_image = bridge.imgmsg_to_cv2(img_msg, "32FC1")
+        # Convert the depth image to a Numpy array since most cv2 functions
+        # require Numpy arrays.
+        cv_image_array = np.array(cv_image, dtype = np.dtype('f8'))
+        # Normalize the depth image to fall between 0 (black) and 1 (white)
+        # http://docs.ros.org/electric/api/rosbag_video/html/bag__to__video_8cpp_source.html lines 95-125
+        cv_image_norm = cv2.normalize(cv_image_array, cv_image_array, 0, 1, cv2.NORM_MINMAX)
+        # Resize to the desired size
+        #cv_image_resized = cv2.resize(cv_image_norm, self.desired_shape, interpolation = cv2.INTER_CUBIC)
+        #depthimg = cv_image_resized
+        cv2.imshow("Image from my node", cv_image_norm)
+        cv2.waitKey(1)
+    except CvBridgeError as e:
+        print e
 
 # Initalize a subscriber to the "/camera/rgb/image_raw" topic with the function "image_callback" as a callback
 #color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
-depth_image = rospy.Subscriber("/camera/depth_registered/image_raw/theora", Image, image_callback2)
+depth_image = rospy.Subscriber("/camera/depth_registered/image", Image, image_callback2)
 
 
 # Initialize an OpenCV Window named "Image Window"
