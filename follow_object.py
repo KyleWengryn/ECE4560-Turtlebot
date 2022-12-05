@@ -91,7 +91,7 @@ def show_color_highlight(img):
     if linear < -0.20:
         linear = -0.20
 
-    if (abs(linear - PREVIOUS_LINEAR)) > 0.05:
+    if (abs(linear - PREVIOUS_LINEAR)) > 0.1:
         linear = PREVIOUS_LINEAR
     else:
         PREVIOUS_LINEAR = linear
