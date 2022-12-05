@@ -141,7 +141,7 @@ def image_callback2(img_msg):
         print e
 
 # Initalize a subscriber to the "/camera/rgb/image_raw" topic with the function "image_callback" as a callback
-#color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
+color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
 depth_image = rospy.Subscriber("/camera/depth_registered/image_raw", Image, image_callback2)
 
 
