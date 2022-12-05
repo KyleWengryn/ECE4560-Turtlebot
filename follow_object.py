@@ -82,7 +82,10 @@ def show_color_highlight(img):
     move_cmd.angular.z = angular
 
     
-    print NORM_IMAGE[cY, cX]
+    distance = NORM_IMAGE[cY, cX]
+
+    linear = (distance - 0.33) 
+    move_cmd.linear.x = linear
 
     cmd_vel.publish(move_cmd)
     r.sleep()
