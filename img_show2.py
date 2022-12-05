@@ -46,8 +46,8 @@ def image_callback(img_msg):
     cv_image_arr = np.array(cv_image)
     rospy.loginfo(cv_image_arr.shape)
 
-    for x in 480:
-        for y in 640:
+    for x in range(0,480):
+        for y in range(0, 640):
             if cv_image_arr[x][y][0] > 200 and cv_image_arr[x][y][1] < 50 and cv_image_arr[x][y][2] < 50:
                 pass
             else:
