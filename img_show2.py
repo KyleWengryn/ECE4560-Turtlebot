@@ -16,6 +16,7 @@ rospy.init_node('opencv_example', anonymous=True)
 
 # Print "Hello ROS!" to the Terminal and to a ROS Log file located in ~/.ros/log/loghash/*.log
 rospy.loginfo("Hello ROS!")
+NORM_IMAGE = None
 
 # Initialize the CvBridge class
 bridge = CvBridge()

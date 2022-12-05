@@ -14,6 +14,7 @@ print "Hello!"
 rospy.init_node('opencv_example', anonymous=True)
 move_cmd = Twist()
 r = rospy.Rate(10)
+NORM_IMAGE = None
 
 cmd_vel = rospy.Publisher('cmd_vel_mux/input/navi', Twist, queue_size=10)
 
@@ -36,6 +37,7 @@ def show_image2(img):
     cv2.waitKey(3)
 
 def show_color_highlight(img):
+    global NORM_IMAGE
     # for x in range(0,480):
     #     for y in range(0, 640):
     #         if cv_image_arr[x][y][0] > 200 and cv_image_arr[x][y][1] < 50 and cv_image_arr[x][y][2] < 50:
@@ -79,6 +81,9 @@ def show_color_highlight(img):
 
     move_cmd.angular.z = angular
 
+    if NORM_IMAGE:
+        print NORM_IMAGE[cX, cY]
+
     cmd_vel.publish(move_cmd)
     r.sleep()
 
@@ -115,15 +120,16 @@ def image_callback(img_msg):
     #show_image(cv_image)
 
 def image_callback2(img_msg):
+    global NORM_IMAGE
     try:
         # The depth image is a single-channel float32 image
         # the values is the distance in mm in z axis
         cv_image = bridge.imgmsg_to_cv2(img_msg, "passthrough")
         # Convert the depth image to a Numpy array since most cv2 functions
         # require Numpy arrays.
-   
-        cv2.imshow("Image from my node", cv_image)
-        print cv_image.shape
+        NORM_IMAGE = cv2.normalize(cv_image, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
+
+        #cv2.imshow("Image from my node", cv_image)
         cv2.waitKey(3)
 
     except CvBridgeError as e:
