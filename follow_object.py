@@ -133,7 +133,8 @@ def image_callback2(img_msg):
         # Resize to the desired size
         #cv_image_resized = cv2.resize(cv_image_norm, self.desired_shape, interpolation = cv2.INTER_CUBIC)
         #depthimg = cv_image_resized
-        cv2.imshow("Image from my node", cv_image)
+        norm_image = cv2.normalize(cv_image, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
+        cv2.imshow("Image from my node", norm_image)
         cv2.waitKey(3)
 
     except CvBridgeError as e:
