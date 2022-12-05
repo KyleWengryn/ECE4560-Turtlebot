@@ -44,9 +44,7 @@ def image_callback(img_msg):
     # cv_image = cv2.transpose(cv_image)
     # cv_image = cv2.flip(cv_image,1)
     cv_image_arr = np.array(cv_image)
-
-    rospy.loginfo(cv_image_arr.shape)
-
+    rospy.loginfo(cv_image_arr[0][0])
     # Show the converted image
     show_image(cv_image)
 
