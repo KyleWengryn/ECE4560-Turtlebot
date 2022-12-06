@@ -98,7 +98,8 @@ def show_color_highlight(img):
 
     result = cv2.bitwise_and(result, result, mask=full_mask)
 
-    result = cv2.circle(result, (cX,cY), radius=10, color=(0, 0, 255), thickness=-1)
+    result[cY - 20:cY +20,cX-20:cX+20] = (255, 0, 0) 
+
     
     #cv2.imshow('mask', full_mask)
     cv2.imshow('result', result)
@@ -136,7 +137,7 @@ def image_callback2(img_msg):
         NORM_IMAGE = cv2.normalize(cv_image, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
 
         #cv2.imshow("Image from my node", NORM_IMAGE)
-        cv2.waitKey(3)
+        #cv2.waitKey(3)
 
     except CvBridgeError as e:
         print e
