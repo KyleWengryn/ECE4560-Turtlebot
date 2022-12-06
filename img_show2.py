@@ -96,7 +96,7 @@ def image_callback2(img_msg):
     try:
         # The depth image is a single-channel float32 image
         # the values is the distance in mm in z axis
-        cv_image = bridge.imgmsg_to_cv2(img_msg, '32FC1')
+        cv_image = bridge.imgmsg_to_cv2(img_msg, 'passthrough')
         # Convert the depth image to a Numpy array since most cv2 functions
         # require Numpy arrays.
         try:
