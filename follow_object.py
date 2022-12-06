@@ -80,10 +80,10 @@ def show_color_highlight(img):
 
     linear = (distance - 0.25) 
 
-    if linear > 0.20:
-        linear = 0.20
-    if linear < -0.20:
-        linear = -0.20
+    if linear > 0.15:
+        linear = 0.15
+    if linear < -0.15:
+        linear = -0.15
 
 
     if distance != 0 and distance < 0.70:       
