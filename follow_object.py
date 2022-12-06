@@ -65,7 +65,7 @@ def show_color_highlight(img):
     cY = int(M["m01"] / M["m00"])
 
     move_cmd.linear.x = 0.0
-    angular = (320 - cX) / 320
+    angular = (320 - cX) * 0.1
 
     if angular > 0.40:
         angular = 0.40
