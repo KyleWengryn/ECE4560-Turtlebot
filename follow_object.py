@@ -105,7 +105,7 @@ def show_color_highlight(img):
 
     # goal is to get centroid to be 320, 240
 
-    print cX, cY, angular, linear, distance
+    print cX, cY, angular, linear, #distance
 
 
     result = cv2.bitwise_and(result, result, mask=full_mask)
