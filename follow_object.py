@@ -73,17 +73,28 @@ def show_color_highlight(img):
     if angular < -0.40:
         angular = -0.40
 
-    move_cmd.angular.z = angular
+    
+    linear = (240.0 - cY) / 240.0
 
-    if NORM_IMAGE is not None:
-        distance = NORM_IMAGE[cY, cX]
+    if linear > 0.20:
+        linear = 0.20
+    
+    if linear < -0.20:
+        linear = -0.20
 
-    linear = (distance - 0.25) 
+    move_cmd.linear.x = linear
 
-    if linear > 0.15:
-        linear = 0.15
-    if linear < -0.15:
-        linear = -0.15
+
+
+    # if NORM_IMAGE is not None:
+    #     distance = NORM_IMAGE[cY, cX]
+
+    # linear = (distance - 0.25) 
+
+    # if linear > 0.15:
+    #     linear = 0.15
+    # if linear < -0.15:
+    #     linear = -0.15
 
 
     if distance != 0 and distance < 0.70:       
