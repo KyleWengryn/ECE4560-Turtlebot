@@ -76,7 +76,7 @@ def show_color_highlight(img):
     move_cmd.angular.z = angular
 
     
-    distance = NORM_IMAGE[cX, cY]
+    distance = NORM_IMAGE[cY, cX]
 
     linear = (distance - 0.15) * 0.4
     if linear > 0.15:
@@ -135,7 +135,6 @@ def image_callback2(img_msg):
         # Convert the depth image to a Numpy array since most cv2 functions
         # require Numpy arrays.
         NORM_IMAGE = cv2.normalize(cv_image, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
-        NORM_IMAGE = np.array(NORM_IMAGE)
         #cv2.imshow("Image from my node", NORM_IMAGE)
         #cv2.waitKey(3)
 
