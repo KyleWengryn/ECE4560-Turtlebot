@@ -29,13 +29,6 @@ rospy.loginfo("Hello ROS!")
 bridge = CvBridge()
 
 # Define a function to show the image in an OpenCV Window
-def show_image(img):
-    cv2.imshow("Image Window", img)
-    cv2.waitKey(3)
-
-def show_image2(img):
-    cv2.imshow("Image Window2", img)
-    cv2.waitKey(3)
 
 def show_color_highlight(img):
     global NORM_IMAGE, PREVIOUS_LINEAR
