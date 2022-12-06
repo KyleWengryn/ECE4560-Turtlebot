@@ -96,7 +96,7 @@ def image_callback2(img_msg):
     try:
         # The depth image is a single-channel float32 image
         # the values is the distance in mm in z axis
-        cv_image = bridge.imgmsg_to_cv2(img_msg, 'passthrough')
+        cv_image = bridge.imgmsg_to_cv2(img_msg, '32FC1')
         # Convert the depth image to a Numpy array since most cv2 functions
         # require Numpy arrays.
         try:
@@ -105,7 +105,7 @@ def image_callback2(img_msg):
             return 1
         # Normalize the depth image to fall between 0 (black) and 1 (white)
         # http://docs.ros.org/electric/api/rosbag_video/html/bag__to__video_8cpp_source.html lines 95-125
-        #cv_image_norm = cv2.normalize(cv_image_array, cv_image_array, 0, 1, cv2.NORM_MINMAX)
+        cv_image_norm = cv2.normalize(cv_image_array, cv_image_array, 0, 1, cv2.NORM_MINMAX)
         #NORM_IMAGE = cv2.normalize(cv_image, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
         # Resize to the desired size
         #cv_image_resized = cv2.resize(cv_image_norm, self.desired_shape, interpolation = cv2.INTER_CUBIC)
