@@ -67,11 +67,11 @@ def show_color_highlight(img):
     move_cmd.linear.x = 0.0
     angular = (320 - cX) * 0.01
 
-    if angular > 0.50:
-        angular = 0.50
+    if angular > 0.40:
+        angular = 0.40
     
-    if angular < -0.50:
-        angular = -0.50
+    if angular < -0.40:
+        angular = -0.40
 
     move_cmd.angular.z = angular
 
@@ -80,10 +80,10 @@ def show_color_highlight(img):
 
     linear = (distance - 0.20) 
 
-    if linear > 0.10:
-        linear = 0.10
-    if linear < -0.10:
-        linear = -0.10
+    if linear > 0.15:
+        linear = 0.15
+    if linear < -0.15:
+        linear = -0.15
 
 
     if distance != 0 and distance < 0.70:       
