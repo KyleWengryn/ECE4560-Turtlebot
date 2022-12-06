@@ -105,12 +105,12 @@ def image_callback2(img_msg):
             return 1
         # Normalize the depth image to fall between 0 (black) and 1 (white)
         # http://docs.ros.org/electric/api/rosbag_video/html/bag__to__video_8cpp_source.html lines 95-125
-        #cv_image_norm = cv2.normalize(cv_image_array, cv_image_array, 0, 1, cv2.NORM_MINMAX)
-        NORM_IMAGE = cv2.normalize(cv_image, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
+        cv_image_norm = cv2.normalize(cv_image_array, cv_image_array, 0, 1, cv2.NORM_MINMAX)
+        #NORM_IMAGE = cv2.normalize(cv_image, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
         # Resize to the desired size
         #cv_image_resized = cv2.resize(cv_image_norm, self.desired_shape, interpolation = cv2.INTER_CUBIC)
         #depthimg = cv_image_resized
-        cv2.imshow("Image from my node", NORM_IMAGE)
+        cv2.imshow("Image from my node", cv_image_norm)
         cv2.waitKey(3)
 
     except CvBridgeError as e:
