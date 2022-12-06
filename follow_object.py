@@ -97,6 +97,8 @@ def show_color_highlight(img):
 
 
     result = cv2.bitwise_and(result, result, mask=full_mask)
+
+    result = cv2.circle(result, (cX,cY), radius=10, color=(0, 0, 255), thickness=-1)
     
     #cv2.imshow('mask', full_mask)
     cv2.imshow('result', result)
