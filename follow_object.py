@@ -96,7 +96,7 @@ def show_color_highlight(img):
     move_cmd.linear.x = linear
 
     #cmd_vel.publish(move_cmd)
-    r.sleep()
+    #r.sleep()
 
     # goal is to get centroid to be 320, 240
 
