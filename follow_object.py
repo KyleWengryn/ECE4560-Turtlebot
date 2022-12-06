@@ -75,8 +75,8 @@ def show_color_highlight(img):
 
     move_cmd.angular.z = angular
 
-    
-    distance = NORM_IMAGE[cY, cX]
+    if NORM_IMAGE is not None:
+        distance = NORM_IMAGE[cY, cX]
 
     linear = (distance - 0.20) 
 
@@ -144,7 +144,7 @@ def image_callback2(img_msg):
 
 # Initalize a subscriber to the "/camera/rgb/image_raw" topic with the function "image_callback" as a callback
 color_image = rospy.Subscriber("/camera/rgb/image_color", Image, image_callback)
-depth_image = rospy.Subscriber("/camera/depth_registered/image_raw", Image, image_callback2)
+depth_image = rospy.Subscriber("/camera/depth/image_raw", Image, image_callback2)
 
 
 # Initialize an OpenCV Window named "Image Window"
