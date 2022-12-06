@@ -86,11 +86,11 @@ def show_color_highlight(img):
         linear = -0.10
 
 
-       
-    move_cmd.linear.x = linear
+    if distance <= 0:       
+        move_cmd.linear.x = linear
 
-    cmd_vel.publish(move_cmd)
-    r.sleep()
+        cmd_vel.publish(move_cmd)
+        r.sleep()
 
     # goal is to get centroid to be 320, 240
 
